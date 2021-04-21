@@ -1,12 +1,15 @@
 import React, {useState, useEffect} from "react";
 import Axios from "axios";
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button } from 'react-bootstrap';
 
 function App() {
 
   const [transactionName, setTransaction] = useState("");
   const [amount, setAmount] = useState("");
   const [transactionList, setList] = useState([]);
+  const [newAmount, setNewAmount] = useState("");
 
   useEffect(() => {
     Axios.get("http://localhost:3001/api/retrieve").then((i) => {
@@ -27,6 +30,12 @@ function App() {
     Axios.delete(`http://localhost:3001/api/delete/${i}`);
   }
 
+  const updateTransaction = (i) => {
+
+    Axios.put("http://localhost:3001/api/update", {transactionName: i, amount: newAmount});
+    setNewAmount("");
+  }
+
 
   return (
     <div className="App">
@@ -43,15 +52,31 @@ function App() {
           setAmount(userInput.target.value);
         }}/>
 
-        <button onClick={submitTransaction} id="bSubmit">Submit</button>
+        <Button onClick={submitTransaction}>Submit</Button>
 
         {transactionList.map((i) => {
           return (
-             <div className="item">
-              <p>Workout name: {i.transactionName}</p>
-              <p>Calories burned: {i.amount}</p>
+             <div class="card">
+               <div class="card-header">{i.transactionName}</div>
+              <div class="card-body">
+              <h5 class="card-title">Calories burned: {i.amount}</h5>
 
-              <button onClick={() => {deleteTransaction(i.transactionName)}}>Delete</button>
+              <Button variant="danger" onClick={() => {deleteTransaction(i.transactionName)}}>Delete</Button>
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Calories</span>
+                </div>
+                <input type="text" class="form-control" onChange={(e) => {setNewAmount(e.target.value)}}/>
+                <div class="input-group-append">
+                  <Button variant="success" onClick={() => {updateTransaction(i.transactionName)}}>Update</Button>
+                </div>
+              </div>
+
+              </div>
+
+              
+              
             </div> );
         })}
       </div>

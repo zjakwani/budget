@@ -45,6 +45,15 @@ app.delete("/api/delete/:transactionName", (req, res) => {
     })
 });
 
+app.put("/api/update", (req, res) => {
+    const x = req.body.amount;
+    const y = req.body.transactionName;
+    const sqlUpdate = "UPDATE BudgetDB.transactions SET amount = ? WHERE transactionName = ?";
+    db.query(sqlUpdate, [x,y], (error, result) => {
+        if (error) console.log(error);
+    })
+});
+
 app.listen(3001, () => {
     console.log("is running");
 });
