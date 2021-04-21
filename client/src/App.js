@@ -22,36 +22,36 @@ function App() {
   };
 
   const deleteTransaction = (i) => {
+
+    setList(transactionList.filter(t => t.transactionName !== i));
     Axios.delete(`http://localhost:3001/api/delete/${i}`);
   }
 
 
   return (
     <div className="App">
-      <h1>Budget App</h1>
+      <h1>Fitness tracker</h1>
 
       <div className="enter">
-        <label>Transaction</label>
+        <label>Workout name</label>
         <input type="text" name="transaction" onChange={(userInput) => {
           setTransaction(userInput.target.value);
         }}/>
         
-        <label>Amount</label>
+        <label>Calories burned</label>
         <input type="number" name="amount" onChange={(userInput) => {
           setAmount(userInput.target.value);
         }}/>
 
-        <button onClick={submitTransaction}>Submit</button>
+        <button onClick={submitTransaction} id="bSubmit">Submit</button>
 
         {transactionList.map((i) => {
           return (
              <div className="item">
-              <h2>{i.transactionName}</h2>
-              <p>{i.amount}</p>
+              <p>Workout name: {i.transactionName}</p>
+              <p>Calories burned: {i.amount}</p>
 
               <button onClick={() => {deleteTransaction(i.transactionName)}}>Delete</button>
-              <input type="text" id="uInput"/>
-              <button>Update</button>
             </div> );
         })}
       </div>

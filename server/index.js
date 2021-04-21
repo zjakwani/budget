@@ -14,7 +14,7 @@ const db = mysql.createConnection({
 
 app.use(cors());
 app.use(express.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: false}));
 
 
 
@@ -46,5 +46,5 @@ app.delete("/api/delete/:transactionName", (req, res) => {
 });
 
 app.listen(3001, () => {
-    console.log("running");
+    console.log("is running");
 });
