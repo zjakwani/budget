@@ -8,7 +8,7 @@ const mysql = require("mysql");
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "West_Jordan82",
+    password: "password",
     database: "BudgetDB",
 })
 

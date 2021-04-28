@@ -54,7 +54,7 @@ function App() {
 
         <Button onClick={submitTransaction}>Submit</Button>
 
-        {transactionList.map((i) => {
+        {Array.from(transactionList).map((i) => {
           return (
              <div class="card">
                <div class="card-header">{i.transactionName}</div>
