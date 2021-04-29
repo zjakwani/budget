@@ -1,4 +1,6 @@
-In progress fitness tracker app using React, Express, Node, and mySQL. Now working on possibly setting up hosting and deployment.
+In progress fitness tracker app using React, Express, Node, and mySQL.
+Now working on possibly setting up hosting and deployment.
+To run front end: cd client ... npm install ... npm start
 
 # Getting Started with Create React App
 
